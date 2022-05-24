@@ -1,9 +1,15 @@
 class Bath:
-    def __init__(self, start_water_temp, start_water_amount):
+    def __init__(self, start_water_temp, start_water_amount, smax_water_amount):
         self.current_water_temp = start_water_temp
         self.target_water_temp = 0
         self.amount_of_water = start_water_amount #liters
+        self.max_water_amount = smax_water_amount #liters
 
+    def is_overflow(self,):
+        if self.amount_of_water < self.max_water_amount:
+            return False
+        return True
+            
 
     def mix_waters(self, flow_speed, termostat_water_temp):
         #flow_speed - variable taken from Termostat object
