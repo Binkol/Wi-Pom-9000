@@ -11,7 +11,7 @@ class Bath:
         return True
             
 
-    def mix_waters(self, flow_speed, termostat_water_temp):
+    def mix_waters(self, Tp, flow_speed, termostat_water_temp):
         #flow_speed - variable taken from Termostat object
         """
         :param flow_speed: import from Termostat.flow_speed
@@ -23,7 +23,7 @@ class Bath:
         t1 = termostat_water_temp 
         t2 = self.current_water_temp
 
-        self.current_water_temp = (m1*t1 + m2*t2)/(m1+m2)
+        self.current_water_temp = (Tp*m1*t1 + m2*t2)/(Tp*m1+m2)
 
     def update_water_amount(self, amount):
         """
