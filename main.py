@@ -11,7 +11,7 @@ from bokeh.plotting import figure, show
 
 
 temp_0 = 20 #water temperature at start
-temp_target = 38
+temp_target = 35
 
 Tp = 0.1 #okres próbkowania 
 t_sim = 1.5 * 3600
@@ -37,7 +37,8 @@ def temp_pid():
         u_PID.append(kp * (e[i] + Tp * sum(e) / Ti + Td * (e[i] - e[i-1]) / Tp))
         
         #print(u_PID[-1])
-        if u_PID[-1] >= 1.0:
+
+        if u_PID[-1] >= 3.0:
             termo.change_hot_percentage(1.0)
         elif u_PID[-1] <= 0:
             termo.change_hot_percentage(0)
@@ -52,11 +53,11 @@ def temp_pid():
         bath_temps.append(bath.current_water_temp)
         #print("e: {}, temp_target: {} u_PID: {}, temp_t: {}".format(e[-1], temp_target, u_PID[i], termo.mixed_water_temp))
 
-    print("e:",e[1:10])
-    print("u_PID:",u_PID[1:10])
+    #print("e:",e[1:10])
+    #print("u_PID:",u_PID[1:10])
 
 def plotting1():
-    p = figure(title="An example of PID", x_axis_label='n', y_axis_label='t_n')
+    p = figure(title="An example of PID", x_axis_label='n', y_axis_label='u_pid')
     p.line(range(N), u_PID, legend_label="u_PID", line_width=2)
     show(p)
 
@@ -69,4 +70,4 @@ def plotting2():
 #print("It took {} seconds".format(counter))
 temp_pid()
 plotting1()
-#plotting2()
+plotting2()
