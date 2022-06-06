@@ -6,7 +6,7 @@ class Termostat:
         self.cold_water_temp = cold
         self.hot_percentage = hot_percentage
         self.cold_percentage = round(1 - hot_percentage,3)
-        self.flow_speed = round(flow_speed/60, 1)
+        self.flow_speed = flow_speed/60
         self.mixed_water_temp = 0
 
     

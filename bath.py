@@ -25,8 +25,8 @@ class Bath:
 
         self.current_water_temp = (Tp*m1*t1 + m2*t2)/(Tp*m1+m2)
 
-    def update_water_amount(self, amount):
+    def update_water_amount(self, Tp, amount):
         """
         :param amount: import from Termostat.flow_speed
         """ 
-        self.amount_of_water += amount
+        self.amount_of_water += Tp * amount
