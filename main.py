@@ -8,13 +8,13 @@ import skfuzzy.control as ctrl
 
 
 temp_0 = 20 #water temperature at start
-temp_target = 15
+temp_target = 35
 
 Tp = 0.1 #okres próbkowania 
 t_sim = 1 * 3600
 N = int(t_sim/Tp) 
 
-kp = 10 #wzmocnienie regulatora
+kp = 0.2 #wzmocnienie regulatora
 Ti = 7.5 #czas zdwojenia
 Td = 0.2
 
@@ -57,7 +57,7 @@ def temp_pid():
 
 def fuzzyInit():
 
-        universe = np.linspace(-2, 2, 5)
+        universe = np.linspace(-3, 4, 1)
         error = ctrl.Antecedent(universe, 'error')
         errorSum = ctrl.Antecedent(universe, 'errorSum')
         output = ctrl.Consequent(universe, 'output')
@@ -128,7 +128,8 @@ def temp_fuzzy():
 
         #print(I, e[-1])
 
-        I = I + e[-1]
+        I = I + e[-1] #zamienic na zmiane uchybu
+        #I =  e[-2] + e[-1]
         sim.input['error'] = e[-1]
         sim.input['errorSum'] = I * Tp
         sim.compute()
@@ -170,10 +171,10 @@ def plotting3(plot_values, plot_title):
     show(p)
 
 
-#temp_pid()
-#plotting1()
-#plotting2()
+temp_pid()
+plotting1()
+plotting2()
 
-temp_plot, u_plot = temp_fuzzy()
-plotting3(temp_plot, "temp_plot")
-plotting3(u_plot, "u_plot")
+#temp_plot, u_plot = temp_fuzzy()
+#plotting3(temp_plot, "temp_plot")
+#plotting3(u_plot, "u_plot")
